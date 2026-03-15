@@ -5,7 +5,7 @@ import com.example.split.config.JwtUtil;
 import com.example.split.DTOs.AuthResponse;
 import com.example.split.DTOs.LoginRequest;
 import com.example.split.Entities.User;
-import com.splitwise.exception.ResourceNotFoundException;
+import com.example.split.exception.ResourceNotFoundException;
 import com.example.split.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;

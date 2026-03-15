@@ -2,7 +2,7 @@ package com.example.split.Service;
 
 import com.example.split.DTOs.SettlementResponse;
 import com.example.split.Entities.*;
-import com.example.split.Exception.ResourceNotFoundException;
+import com.example.split.exception.ResourceNotFoundException;
 import com.example.split.Repository.SettlementRepository;
 import com.example.split.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;

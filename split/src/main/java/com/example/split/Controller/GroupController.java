@@ -1,4 +1,4 @@
-package com.splitwise.controller;
+package com.example.split.Controller;
 
 import com.example.split.DTOs.GroupRequest;
 import com.example.split.Entities.Group;
