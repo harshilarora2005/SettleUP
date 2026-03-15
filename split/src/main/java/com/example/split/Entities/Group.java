@@ -1,5 +1,6 @@
 package com.example.split.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import java.util.*;
@@ -28,6 +29,7 @@ public class Group {
     )
     private Set<User> members = new HashSet<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL)
     private List<Expense> expenses = new ArrayList<>();
 }

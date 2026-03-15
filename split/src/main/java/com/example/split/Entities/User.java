@@ -1,5 +1,6 @@
 package com.example.split.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import java.util.*;
@@ -19,9 +20,11 @@ public class User {
     @Column(nullable = false, unique = true)
     private String email;
 
+    @JsonIgnore
     @Column(nullable = false)
     private String password;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "members")
     private Set<Group> groups = new HashSet<>();
 }
