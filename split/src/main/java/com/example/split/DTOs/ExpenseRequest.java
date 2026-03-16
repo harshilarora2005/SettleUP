@@ -22,6 +22,7 @@ public class ExpenseRequest {
 
     private String category;
     private LocalDate date;
+    private Long paidById;
 
     private List<SplitDetail> splits;
 

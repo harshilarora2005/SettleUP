@@ -57,4 +57,14 @@ public class GroupService {
         group.getMembers().remove(user);
         groupRepository.save(group);
     }
+
+    public void deleteGroup(Long groupId, String email) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+        Group group = getGroupById(groupId);
+        if (!group.getCreatedBy().getEmail().equals(email)) {
+            throw new org.springframework.security.access.AccessDeniedException("Only the group creator can delete this group");
+        }
+        groupRepository.delete(group);
+    }
 }

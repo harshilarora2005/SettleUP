@@ -26,9 +26,15 @@ public class ExpenseService {
     private final GroupService groupService;
 
     @Transactional
-    public Expense addExpense(ExpenseRequest request, String payerEmail) {
-        User paidBy = userRepository.findByEmail(payerEmail)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+    public Expense addExpense(ExpenseRequest request, String requesterEmail) {
+        User paidBy;
+        if (request.getPaidById() != null) {
+            paidBy = userRepository.findById(request.getPaidById())
+                    .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+        } else {
+            paidBy = userRepository.findByEmail(requesterEmail)
+                    .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+        }
         Group group = groupService.getGroupById(request.getGroupId());
 
         Expense expense = Expense.builder()
@@ -73,4 +79,6 @@ public class ExpenseService {
                 .sorted(Comparator.comparing(Expense::getDate).reversed())
                 .collect(java.util.stream.Collectors.toList());
     }
+
+
 }

@@ -18,6 +18,7 @@ export const groupService = {
     addMember: (groupId, userId) =>
         api.post(`/groups/${groupId}/members/${userId}`).then((r) => r.data),
     leave: (groupId) => api.delete(`/groups/${groupId}/leave`).then(r => r.data),
+    delete: (groupId) => api.delete(`/groups/${groupId}`).then(r => r.data),
 }
 
 export const expenseService = {
