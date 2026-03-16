@@ -17,10 +17,12 @@ export const groupService = {
     getById: (id) => api.get(`/groups/${id}`).then((r) => r.data),
     addMember: (groupId, userId) =>
         api.post(`/groups/${groupId}/members/${userId}`).then((r) => r.data),
+    leave: (groupId) => api.delete(`/groups/${groupId}/leave`).then(r => r.data),
 }
 
 export const expenseService = {
     add: (data) => api.post('/expenses/add', data).then((r) => r.data),
+    getAll: () => api.get('/expenses/all').then(r => r.data),
     getByGroup: (groupId) => api.get(`/expenses/group/${groupId}`).then((r) => r.data),
     delete: (id) => api.delete(`/expenses/${id}`).then((r) => r.data),
 }

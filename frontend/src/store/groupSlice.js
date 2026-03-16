@@ -26,6 +26,17 @@ export const createGroup = createAsyncThunk('groups/create', async(data, { rejec
     }
 })
 
+export const leaveGroup = createAsyncThunk('groups/leave', async (id, { rejectWithValue }) => {
+    try { 
+        await groupService.leave(id); 
+        return id 
+    }
+    catch (err) { 
+        return rejectWithValue(err.response?.data?.message || 'Failed to leave group') 
+    }
+})
+
+
 const groupSlice = createSlice({
     name: 'groups',
     initialState: {
@@ -63,6 +74,10 @@ const groupSlice = createSlice({
         .addCase(createGroup.fulfilled,(state, a) => { 
             state.list.unshift(a.payload) 
         })
+        .addCase(leaveGroup.fulfilled, (state, a) => {
+                state.list = state.list.filter(g => g.id !== a.payload)
+                state.current = null
+            })
     }
 })
 

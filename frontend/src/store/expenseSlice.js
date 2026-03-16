@@ -12,6 +12,15 @@ export const fetchExpenses = createAsyncThunk(
     }
 )
 
+export const fetchAllExpenses = createAsyncThunk('expenses/fetchAll', async (_, { rejectWithValue }) => {
+    try { 
+        return await expenseService.getAll() 
+    }
+    catch (err) { 
+        return rejectWithValue(err.response?.data?.message || 'Failed') 
+    }
+})
+
 export const addExpense = createAsyncThunk(
     'expenses/add',
     async (data, { rejectWithValue }) => {
@@ -50,6 +59,7 @@ const expenseSlice = createSlice({
     name: 'expenses',
     initialState: {
         list: [],
+        allExpenses: [],
         settlements: [],
         loading: false,
         settleLoading: false,
@@ -99,6 +109,15 @@ const expenseSlice = createSlice({
 
         .addCase(fetchSettlementPlan.rejected, (state) => {
             state.settleLoading = false
+        })
+        .addCase(fetchAllExpenses.pending, state => { 
+            state.allLoading = true 
+        })
+        .addCase(fetchAllExpenses.fulfilled, (state, a) => { 
+            state.allLoading = false; state.allExpenses = a.payload 
+        })
+        .addCase(fetchAllExpenses.rejected, state => { 
+            state.allLoading = false 
         })
     },
 })
