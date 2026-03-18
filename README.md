@@ -1,4 +1,4 @@
-# Splitwise Clone
+# SettleUP
 
 A full-stack expense splitting application built with **React + Vite** (frontend) and **Spring Boot** (backend), using **PostgreSQL** as the database.
 
