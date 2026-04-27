@@ -15,6 +15,15 @@ export function AuthProvider({ children }) {
         }
     }
 
+    async function handleRegister(data) {
+        const result = await dispatch(registerThunk(data))
+        if (registerThunk.fulfilled.match(result)) {
+            return { error: null }
+        } else {
+            return { error: result.payload || 'Registration failed' }
+        }
+    }
+
     return (
         <AuthContext.Provider
             value={{
@@ -23,7 +32,7 @@ export function AuthProvider({ children }) {
                 loading,
                 error,
                 login: handleLogin,
-                register: (data) => dispatch(registerThunk(data)),
+                register: handleRegister,
                 logout: () => dispatch(logout()),
             }}
         >
